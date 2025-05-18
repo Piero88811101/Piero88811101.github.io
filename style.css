@@ -1,0 +1,227 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Roboto Condensed', sans-serif;
+    background-color: #1a1a1a; /* Darker background */
+    color: #e0e0e0; /* Lighter text */
+}
+
+#container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#gameCanvas {
+    display: block;
+}
+
+#ui {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: space-between; 
+    font-family: 'Orbitron', sans-serif; /* Game-like font for UI text */
+}
+
+#crosshairContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px; /* Slightly smaller crosshair */
+    height: 30px;
+}
+
+#crosshair {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 2px rgba(0,0,0,0.8)); /* Subtle shadow for better visibility */
+}
+
+#healthBarContainer {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: rgba(0,0,0,0.7); /* Darker, more translucent */
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+#healthBar {
+    width: 200px;
+    height: 20px;
+    background-color: #222; /* Base for health bar */
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 4px;
+    overflow: hidden; /* Ensures inner bar respects border radius */
+}
+
+#healthBarFill { 
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #ff416c, #ff4b2b); /* Default to red gradient */
+    transition: width 0.3s ease-out, background-color 0.3s ease-out;
+    border-radius: 3px;
+}
+
+#healthText {
+    display: block;
+    margin-top: 8px;
+    color: #e0e0e0;
+    font-size: 16px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+}
+
+#ammoContainer {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(0,0,0,0.7);
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+}
+
+#messageContainer {
+    position: absolute;
+    top: 30px; /* Slightly lower */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0,0,0,0.8);
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 20px;
+    color: #ffcc00; /* Warning/alert color */
+    border: 1px solid rgba(255,204,0,0.5);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.6);
+    text-align: center;
+    display: none; 
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+}
+
+#enemyCounter {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(0,0,0,0.7);
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 18px;
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+}
+
+#blocker {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(30,30,30,0.85) 0%, rgba(10,10,10,0.95) 100%);
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* To stack title and auth container */
+}
+
+#gameTitle { 
+    font-family: 'Orbitron', sans-serif;
+    font-size: 64px;
+    font-weight: 700;
+    color: #ff6b6b; /* A vibrant color */
+    text-shadow: 0 0 10px #ff6b6b, 0 0 20px #ff6b6b, 0 0 30px #ff4b2b, 2px 2px 5px rgba(0,0,0,0.8);
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+}
+
+#authContainer { 
+    width: 90%;
+    max-width: 450px; /* Slightly wider */
+    padding: 30px;
+    background-color: rgba(40,40,40,0.9);
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 5px 25px rgba(0,0,0,0.7);
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+#authContainer input[type="text"],
+#authContainer input[type="password"],
+#authContainer button {
+    display: block;
+    width: calc(100% - 22px); 
+    padding: 12px; /* More padding */
+    margin: 15px auto; /* More margin */
+    border-radius: 8px;
+    border: 1px solid #555; /* Darker border */
+    font-size: 18px;
+    box-sizing: border-box;
+    background-color: #333; /* Darker input background */
+    color: #e0e0e0;
+}
+
+#authContainer input[type="text"]::placeholder,
+#authContainer input[type="password"]::placeholder {
+    color: #888;
+}
+
+#authContainer button {
+    background: linear-gradient(to right, #ff7e5f, #feb47b); /* Orange/yellow gradient */
+    color: white;
+    cursor: pointer;
+    border: none;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
+
+#authContainer button#facebookLoginButton {
+    background: linear-gradient(to right, #4e69a2, #3b5998); /* Facebook blue gradient */
+}
+
+#authContainer button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+#authContainer button#facebookLoginButton:hover {
+    background: linear-gradient(to right, #415a89, #324d82); /* Darker Facebook blue */
+}
+
+#authContainer p {
+    margin-bottom: 20px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+#authContainer p.auth-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #ff6b6b;
+    margin-bottom: 25px;
+    text-shadow: 0 0 5px #ff6b6b;
+}
+
+#authContainer p.auth-instructions {
+    font-size: 16px;
+    color: #ccc;
+}

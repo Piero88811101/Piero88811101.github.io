@@ -1,0 +1,45 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VENGE 2.0</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="container">
+        <canvas id="gameCanvas"></canvas>
+        <div id="ui">
+            <div id="crosshairContainer">
+                <img id="crosshair" src="crosshair.png" alt="crosshair">
+            </div>
+            <div id="healthBarContainer">
+                <div id="healthBar"></div>
+                <span id="healthText">HP: 100</span>
+            </div>
+            <div id="ammoContainer">
+                <span id="ammoText">AMMO: 30/30</span>
+            </div>
+            <div id="messageContainer">
+                <p id="messageText"></p>
+            </div>
+            <div id="enemyCounter">Enemies Left: <span id="enemyCount">0</span></div>
+        </div>
+        <div id="blocker">
+            <div id="authContainer">
+                <!-- Content will be populated by JavaScript -->
+                <!-- Initially, this will be a registration form -->
+            </div>
+        </div>
+    </div>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
